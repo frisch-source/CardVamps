@@ -9,6 +9,7 @@ public class Card : MonoBehaviour
     [SerializeField] Sprite front;
     SpriteRenderer spriteRenderer;
     GameManager gameManager;
+    private int ante = 1;
     
     bool faceDown = true;
 
@@ -51,12 +52,17 @@ public class Card : MonoBehaviour
     {
         isVamp = true;
     }
+    public void RemoveVamp()
+    {
+        isVamp = false;
+    }
     public void FlipCard()
     {
         if (faceDown)
         {
             spriteRenderer.sprite = front;
             faceDown = false;
+            gameManager.UpdateBloodRound(ante);
             if (isVamp)
             {
                 gameManager.Lose();

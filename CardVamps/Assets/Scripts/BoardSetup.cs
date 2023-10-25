@@ -21,6 +21,8 @@ public class BoardSetup : MonoBehaviour
     Sprite[] cardSprites;
     List<GameObject> cards = new List<GameObject>();
     double[] cardOrder = new double[9];
+
+    private int vampPos = 0;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -42,10 +44,10 @@ public class BoardSetup : MonoBehaviour
 
     }
 
-    void SetupBoard()
+    public void SetupBoard()
     {
         int toFlip = 0;
-        int vampPos = 0;
+        cards[vampPos].GetComponent<Card>().RemoveVamp();
         Shuffle();
         for (int i = 0; i < cardSprites.Length; i++)
         {
@@ -53,7 +55,7 @@ public class BoardSetup : MonoBehaviour
             {
                 vampPos = i;
                 cards[i].GetComponent<Card>().SetVamp();
-                //Debug.Log("Vamp Location = " + cards[i].name);
+                Debug.Log("Vamp Location = " + cards[i].name);
             }
             cards[i].GetComponent<Card>().SetFront(cardSprites[i]);
             //Debug.Log("Card " + (i+1) + " = " + cardSprites[i]);
