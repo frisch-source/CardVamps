@@ -10,10 +10,12 @@ public class Card : MonoBehaviour
     SpriteRenderer spriteRenderer;
     GameManager gameManager;
     private int ante = 1;
+    [SerializeField] int value;
     
     bool faceDown = true;
+    bool hasNumPowerUp = false;
 
-    bool isVamp = false;
+    [SerializeField] bool isVamp;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -51,6 +53,7 @@ public class Card : MonoBehaviour
     public void SetVamp()
     {
         isVamp = true;
+        //value = 10;
     }
     public void RemoveVamp()
     {
@@ -67,7 +70,30 @@ public class Card : MonoBehaviour
             {
                 gameManager.Lose();
             }    
+            if (hasNumPowerUp)
+            {
+
+            }
             gameManager.IncrementFlipped();
         }
+    }
+
+    public void SetValue(int value)
+    {
+        this.value = value;
+    }    
+    public int GetValue()
+    {
+        return value;
+    }
+
+    public bool IsVamp()
+    { 
+        return isVamp; 
+    }
+
+    public void SetHasNumPowerup()
+    {
+        hasNumPowerUp = true;
     }
 }
