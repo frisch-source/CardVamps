@@ -103,8 +103,8 @@ public class PlusPowerUp : MonoBehaviour
         }
         else 
         {
-            int ran = Random.Range(value, 10);
-            Sprite newSprite = onCardForms[ran];
+            int ran = Random.Range(2,value);
+            Sprite newSprite = onCardForms[ran-2];
             spriteRenderer.sprite = newSprite;
         }
     }

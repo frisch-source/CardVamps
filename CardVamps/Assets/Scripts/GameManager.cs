@@ -12,8 +12,11 @@ public class GameManager : MonoBehaviour
     private int bloodTotal = 50;
     private int bloodRound = 0;
     private int round = 1;
+    private string currentRoundPipsS = ".    .    .    .    .";
+    private string currentRoundPipsOnlyResults = "";
 
     [SerializeField] TextMeshProUGUI currentRoundText;
+    [SerializeField] TextMeshProUGUI currentRoundPips;
     [SerializeField] TextMeshProUGUI roundBloodText;
     [SerializeField] TextMeshProUGUI bloodTotalText;
     [SerializeField] BoardSetup boardSetup;
@@ -54,10 +57,15 @@ public class GameManager : MonoBehaviour
         lost = true;
         bloodTotal -= bloodRound;
         bloodRound = 0;
-        roundBloodText.text = "" + bloodRound + "mL";
+        roundBloodText.text = "" + bloodRound + " mL";
         round++;
         bloodTotalText.text = "" + bloodTotal + " mL";
         boardSetup.SetupBoard();
+
+        currentRoundPipsOnlyResults += "L ";
+        currentRoundText.text = "Round " + round;
+        currentRoundPips.text = ConstructPipString();
+        lost = false;
     }
 
     void Win()
@@ -69,10 +77,13 @@ public class GameManager : MonoBehaviour
         UpdateBloodTotal();
         UpdateBloodRound(bloodRound * -1);
         round++;
-        roundBloodText.text = "" + bloodRound + "mL";
+        roundBloodText.text = "" + bloodRound + " mL";
         bloodTotalText.text = "" + bloodTotal + " mL";
         boardSetup.SetupBoard();
 
+        currentRoundPipsOnlyResults += "W ";
+        currentRoundText.text = "Round " + round;
+        currentRoundPips.text = ConstructPipString();
     }
 
     public void UpdateBloodTotal()
@@ -84,6 +95,17 @@ public class GameManager : MonoBehaviour
     public void UpdateBloodRound(int addition)
     {
         bloodRound += addition;
-        roundBloodText.text = "" + bloodRound + "mL";
+        roundBloodText.text = "" + bloodRound + " mL";
+    }
+
+    private string ConstructPipString()
+    {
+        string toReturn = currentRoundPipsOnlyResults;
+         
+        for (int i = 0; i < 5-round + 1; i++)
+        {
+            toReturn += "   .";
+        }
+        return toReturn;
     }
 }

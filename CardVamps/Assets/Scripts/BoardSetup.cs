@@ -111,14 +111,9 @@ public class BoardSetup : MonoBehaviour
         }
         int flip = UnityEngine.Random.Range(0, 2);
         //vamp location is always at 4 card array
-        if (flip == 0)
-        {
-            toFlip = UnityEngine.Random.Range(0, 4);
-        }
-        else
-        {
-            toFlip = UnityEngine.Random.Range(5, 9);
-        }
+        
+        toFlip = UnityEngine.Random.Range(0, 8);
+        
         cards[toFlip].GetComponent<Card>().FlipCard();
         
     }
