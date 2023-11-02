@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private int round = 1;
     private string currentRoundPipsS = ".    .    .    .    .";
     private string currentRoundPipsOnlyResults = "";
+    private GameObject[] topPowerUps = new GameObject[3];
 
     [SerializeField] TextMeshProUGUI currentRoundText;
     [SerializeField] TextMeshProUGUI currentRoundPips;
@@ -38,6 +39,11 @@ public class GameManager : MonoBehaviour
     {
         cardsFlipped ++;
     }
+    
+    public int GetVampPosition()
+    {
+        return boardSetup.GetVampPosition();
+    }
 
     // Update is called once per frame
     void Update()
@@ -49,6 +55,22 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void Pass()
+    {
+        Debug.Log("Passed");
+        cardsFlipped = 0;
+        //subtract 2 from earnings and eventually scale with ante
+        bloodTotal += bloodRound-2;
+        bloodRound = 0;
+        roundBloodText.text = "" + bloodRound + " mL";
+        round++;
+        bloodTotalText.text = "" + bloodTotal + " mL";
+        boardSetup.SetupBoard();
+
+        currentRoundPipsOnlyResults += "P ";
+        currentRoundText.text = "Round " + round;
+        currentRoundPips.text = ConstructPipString();
+    }
     public void Lose() 
     {
         //m_gameOver.Invoke();

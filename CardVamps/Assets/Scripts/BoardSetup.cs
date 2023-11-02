@@ -156,4 +156,8 @@ public class BoardSetup : MonoBehaviour
         //Array.Sort(cardOrder, cardSprites);
         //Array.Sort(cardOrder, cardLocations);
     }
+    public int GetVampPosition()
+    {
+        return vampPosInDeck;
+    }
 }
