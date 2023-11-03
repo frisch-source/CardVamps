@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public void IncrementFlipped()
     {
         cardsFlipped ++;
+        //Debug.Log(cardsFlipped);
     }
     
     public int GetVampPosition()
@@ -129,5 +130,14 @@ public class GameManager : MonoBehaviour
             toReturn += "   .";
         }
         return toReturn;
+    }
+
+    public void UpdateBoardRow(int row)
+    {
+        boardSetup.UpdateRow(row);
+    }
+    public void UpdateBoardColumn(int column)
+    {
+        boardSetup.UpdateColumn(column);
     }
 }

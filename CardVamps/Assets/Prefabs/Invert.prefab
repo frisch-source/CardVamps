@@ -151,5 +151,5 @@ MonoBehaviour:
   seven: {fileID: 21300000, guid: 0b089d91953703846a8f35806567c359, type: 3}
   eight: {fileID: 21300000, guid: 11c68a2f23e24af4c81b89960e2e7656, type: 3}
   nine: {fileID: 21300000, guid: 35d11d44dfe3dca47b08e017bc545ac2, type: 3}
-  powerDisabledSprite: {fileID: 21300000, guid: 2c788350302873f4092cfd121427372a, type: 3}
+  powerDisabledSprite: {fileID: 21300000, guid: f6f904751065a35448fc4cc093aaa0aa, type: 3}
   powerEnabledSprite: {fileID: 21300000, guid: 29ad2c7ace1b94349b79fe0f0aa96505, type: 3}

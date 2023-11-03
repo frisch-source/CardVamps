@@ -100,6 +100,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   back: {fileID: 21300000, guid: 01e905e50c766e24081c20484c30923b, type: 3}
   front: {fileID: 21300000, guid: ea07c9dd82aeb254fb45fe25c213fc8e, type: 3}
+  value: 0
+  isVamp: 0
+  m_DisablePlusPower:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 962831415718533969, guid: 98a5ea84e9f066648884951745ca23c3, type: 3}
+        m_TargetAssemblyTypeName: PlusPowerUp, Assembly-CSharp
+        m_MethodName: DisablePowerup
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!61 &2878048084593923380
 BoxCollider2D:
   m_ObjectHideFlags: 0

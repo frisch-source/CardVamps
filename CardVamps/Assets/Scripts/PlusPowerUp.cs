@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.U2D;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlusPowerUp : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class PlusPowerUp : MonoBehaviour
     Sprite[] onCardForms = new Sprite[8];
     [SerializeField] Sprite powerDisabledSprite;
     [SerializeField] Sprite powerEnabledSprite;
+    [SerializeField] Sprite powerUsedSprite;
+    [SerializeField] GameObject powerUsedObject;
     BoxCollider2D powerCollider;
     Sprite onCardSprite;
     SpriteRenderer spriteRenderer;
@@ -25,16 +29,19 @@ public class PlusPowerUp : MonoBehaviour
     bool powerEnabled = false;
     private bool clicked = false;
     bool onCard = false;
-    Vector3 originalPos;
+    [SerializeField] Vector3 originalPos;
+
     // Start is called before the first frame update
     void Awake()
     {
+        //m_ReceiveFlipCall.AddListener(Flip);
+
         spriteRenderer = GetComponent<SpriteRenderer>();
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         board = GameObject.FindGameObjectWithTag("Board");
         powerCollider = GetComponent<BoxCollider2D>();
         onCardForms = new Sprite[] { two, three, four, five, six, seven, eight, nine };
-        originalPos = transform.position;
+        //originalPos = transform.position;
     }
 
     // Update is called once per frame
@@ -50,21 +57,25 @@ public class PlusPowerUp : MonoBehaviour
         }
     }
 
-    private void EnablePowerup()
+    public void EnablePowerup()
     {
         spriteRenderer.sprite = powerEnabledSprite;
+        powerEnabled = true;
     }
 
     public void DisablePowerup() 
     {
-        spriteRenderer.sprite = powerDisabledSprite;
+        spriteRenderer.sprite = powerUsedSprite;
+        transform.position = originalPos;
+        powerEnabled = false;
     }
 
     private void OnMouseDown()
     {
-        if (!clicked && !onCard)
+        if (!clicked && !onCard && powerEnabled)
         {
             clicked = true;
+            powerUsedObject.SetActive(true);
         }
         else if (clicked && !onCard) 
         {
@@ -87,10 +98,12 @@ public class PlusPowerUp : MonoBehaviour
                 clicked = false;
                 onCard = true;
                 ChangeToOnCardSprite(cardVal);
+                overlapCard.SetHasNumPowerup();
                 
                 Vector3 cardPos = overlaps[1].GetComponent<Transform>().position;
                 cardPos = new Vector3(cardPos.x, cardPos.y, -2);
                 transform.position = cardPos;
+
             }
         }
     }
@@ -107,5 +120,16 @@ public class PlusPowerUp : MonoBehaviour
             Sprite newSprite = onCardForms[ran-2];
             spriteRenderer.sprite = newSprite;
         }
+    }
+
+    public void ResetPowerUp()
+    {
+        DisablePowerup();
+        spriteRenderer.sprite = powerDisabledSprite;
+        //transform.position = originalPos;
+        //EnablePowerup();
+        powerUsedObject.SetActive(false);
+        clicked = false;
+        onCard = false;
     }
 }

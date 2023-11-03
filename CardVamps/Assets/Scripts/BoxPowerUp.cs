@@ -8,9 +8,15 @@ public class BoxPowerUp : MonoBehaviour
     GameManager gameManager;
     [SerializeField] GameObject frame;
     [SerializeField] float timeToAnimate;
+    [SerializeField] Sprite enabledSprite;
+    [SerializeField] Sprite disabled;
+    [SerializeField] Sprite used;
+    SpriteRenderer spriteRenderer;
+    [SerializeField] Vector3 orignalPos;
     int[] circleAnimateVals = new int[] { 0, 1, 3, 2 };
     private bool clicked = false;
-    bool onCard = false;
+    bool isEnabled = false;
+    int vPos;
     
     // Start is called before the first frame update
     void Start()
@@ -21,6 +27,7 @@ public class BoxPowerUp : MonoBehaviour
         Vector3 lowerRight = new Vector3(.75f, -1, -.5f);
         locations = new Vector3[] { upperLeft, upperRight, lowerLeft, lowerRight };
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         frame.gameObject.SetActive(false);
     }
 
@@ -32,17 +39,18 @@ public class BoxPowerUp : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (!clicked)
+        if (!clicked && isEnabled)
         {
             PlaceFrame();
             clicked = true;
+            UsePowerUp();
         }
     }
 
     void PlaceFrame()
     {
         
-        int vPos = gameManager.GetVampPosition();
+        vPos = gameManager.GetVampPosition();
         Vector3 targetLoc;
 
         //Corners
@@ -50,15 +58,15 @@ public class BoxPowerUp : MonoBehaviour
         {
             targetLoc = locations[0];
         }
-        if (vPos == 2)
+        else if (vPos == 2)
         {
             targetLoc = locations[1];
         }
-        if (vPos == 6)
+        else if (vPos == 6)
         {
             targetLoc = locations[2];
         }
-        if (vPos == 8)
+        else if (vPos == 8)
         {
             targetLoc = locations[3];
         }
@@ -116,6 +124,7 @@ public class BoxPowerUp : MonoBehaviour
         //middle
         else
         {
+            Debug.Log("In Middle");
             int flip = Random.Range(0, 4);
             if (flip == 0)
             {
@@ -165,5 +174,26 @@ public class BoxPowerUp : MonoBehaviour
             }
             yield return new WaitForSeconds(timeToAnimate);
         }
+    }
+
+    public void EnablePowerUp()
+    {
+        spriteRenderer.sprite = enabledSprite;
+        isEnabled = true;
+    }
+
+    public void UsePowerUp()
+    {
+        spriteRenderer.sprite = used;
+        transform.position = orignalPos;
+    }
+
+    public void ResetPowerUp()
+    {
+        frame.SetActive(false);
+        spriteRenderer.sprite = disabled;
+        clicked = false;
+        isEnabled = false;
+        transform.position = orignalPos;
     }
 }
