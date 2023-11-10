@@ -9,7 +9,10 @@ public class GameManager : MonoBehaviour
     public UnityEvent m_gameOver;
     private int cardsFlipped = 0;
     private bool lost = false;
-    private int bloodTotal = 50;
+
+    //change for final release
+    [SerializeField] int bloodTotal = 50;
+
     private int bloodRound = 0;
     private int round = 1;
     private string currentRoundPipsS = ".    .    .    .    .";
@@ -21,9 +24,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI roundBloodText;
     [SerializeField] TextMeshProUGUI bloodTotalText;
     [SerializeField] BoardSetup boardSetup;
+    [SerializeField] GameObject board;
+    [SerializeField] GameObject restartButton;
+    [SerializeField] TextMeshProUGUI gameOverText;
+
     private void Awake()
     {
-        
+        restartButton.SetActive(false);
+        board.SetActive(true);
     }
     // Start is called before the first frame update
     void Start()
@@ -54,6 +62,46 @@ public class GameManager : MonoBehaviour
             Win();
             
         }
+        if (bloodTotal >= 100)
+        {
+            currentRoundPips.enabled = false;
+            roundBloodText.enabled = false;
+            currentRoundText.enabled = false;
+            bloodTotalText.enabled = false;
+            restartButton.SetActive(true);
+            board.SetActive(false);
+            gameOverText.text = "You Won!";
+        }
+        if (bloodTotal <= 0)
+        {
+            currentRoundPips.enabled = false;
+            roundBloodText.enabled = false;
+            currentRoundText.enabled = false;
+            bloodTotalText.enabled = false;
+            restartButton.SetActive(true);
+            board.SetActive(false);
+            gameOverText.text = "You Lost";
+        }
+    }
+
+    public void RestartGame()
+    {
+        bloodTotal = 50;
+        cardsFlipped = 0;
+        bloodRound = 0;
+        roundBloodText.text = "" + bloodRound + " mL";
+        round = 1;
+        bloodTotalText.text = "" + bloodTotal + "mL";
+        currentRoundText.text = "Round " + round;
+        currentRoundPips.text = currentRoundPipsS;
+
+        currentRoundPips.enabled = true;
+        roundBloodText.enabled = true;
+        currentRoundText.enabled = true;
+        bloodTotalText.enabled = true;
+        restartButton.SetActive(false);
+        board.SetActive(true);
+        boardSetup.SetupBoard();
     }
 
     public void Pass()

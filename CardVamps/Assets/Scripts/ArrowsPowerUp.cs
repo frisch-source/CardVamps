@@ -112,7 +112,7 @@ public class ArrowsPowerUp : MonoBehaviour
                 upVal = upCard.GetValue();
                 upArrow.SetActive(true);
                 upArrow.transform.position = new Vector3(cardPos.x, cardPos.y + 1, cardPos.z);
-                if (upVal > cardVal)
+                if (upVal >= cardVal)
                 {
                     upArrow.transform.rotation = downRotation;
                 }
@@ -132,7 +132,7 @@ public class ArrowsPowerUp : MonoBehaviour
                 leftArrow.SetActive(true);
                 leftVal = leftCard.GetValue();
                 leftArrow.transform.position = new Vector3(cardPos.x - 0.75f, cardPos.y, cardPos.z);
-                if (leftVal > cardVal)
+                if (leftVal >= cardVal)
                 {
                     leftArrow.transform.rotation = rightRotation;
                 }
@@ -153,7 +153,7 @@ public class ArrowsPowerUp : MonoBehaviour
                 rightArrow.SetActive(true);
                 rightVal = rightCard.GetValue();
                 rightArrow.transform.position = new Vector3(cardPos.x + 0.75f, cardPos.y, cardPos.z);
-                if (rightVal > cardVal)
+                if (rightVal >= cardVal)
                 {
                     rightArrow.transform.rotation = leftRotation;
                 }
@@ -175,7 +175,7 @@ public class ArrowsPowerUp : MonoBehaviour
                 downArrow.SetActive(true);
                 downVal = downCard.GetValue();
                 downArrow.transform.position = new Vector3(cardPos.x, cardPos.y - 1, cardPos.z);
-                if (downVal > cardVal)
+                if (downVal >= cardVal)
                 {
                     downArrow.transform.rotation = upRotation;
                 }
