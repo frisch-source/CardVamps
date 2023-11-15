@@ -124,7 +124,7 @@ public class BoxPowerUp : MonoBehaviour
         //middle
         else
         {
-            Debug.Log("In Middle");
+            //Debug.Log("In Middle");
             int flip = Random.Range(0, 4);
             if (flip == 0)
             {

@@ -94,7 +94,7 @@ public class PlusPowerUp : MonoBehaviour
             {
                 overlapCard = overlaps[1].GetComponent<Card>();
                 int cardVal = overlapCard.GetValue();
-                Debug.Log(cardVal);
+                //Debug.Log(cardVal);
                 clicked = false;
                 onCard = true;
                 ChangeToOnCardSprite(cardVal);

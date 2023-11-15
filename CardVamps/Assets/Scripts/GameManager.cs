@@ -28,6 +28,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject restartButton;
     [SerializeField] TextMeshProUGUI gameOverText;
 
+    [SerializeField] GameObject passButton;
+    [SerializeField] TextMeshProUGUI bloodTotalUnderText;
+    [SerializeField] TextMeshProUGUI roundTotalUnderText;
+
     private void Awake()
     {
         restartButton.SetActive(false);
@@ -40,15 +44,15 @@ public class GameManager : MonoBehaviour
         //{
         //    m_gameOver = new UnityEvent();
         //}
-        
+
     }
 
     public void IncrementFlipped()
     {
-        cardsFlipped ++;
+        cardsFlipped++;
         //Debug.Log(cardsFlipped);
     }
-    
+
     public int GetVampPosition()
     {
         return boardSetup.GetVampPosition();
@@ -60,7 +64,7 @@ public class GameManager : MonoBehaviour
         if (cardsFlipped == 8 && !lost)
         {
             Win();
-            
+
         }
         if (bloodTotal >= 100)
         {
@@ -69,16 +73,22 @@ public class GameManager : MonoBehaviour
             currentRoundText.enabled = false;
             bloodTotalText.enabled = false;
             restartButton.SetActive(true);
+            passButton.SetActive(false);
+            bloodTotalUnderText.enabled = false;
+            roundTotalUnderText.enabled = false;
             board.SetActive(false);
             gameOverText.text = "You Won!";
         }
-        if (bloodTotal <= 0)
+        if (bloodTotal <= 0 || round > 20)
         {
             currentRoundPips.enabled = false;
             roundBloodText.enabled = false;
             currentRoundText.enabled = false;
             bloodTotalText.enabled = false;
             restartButton.SetActive(true);
+            passButton.SetActive(false);
+            bloodTotalUnderText.enabled = false;
+            roundTotalUnderText.enabled = false;
             board.SetActive(false);
             gameOverText.text = "You Lost";
         }
@@ -94,19 +104,23 @@ public class GameManager : MonoBehaviour
         bloodTotalText.text = "" + bloodTotal + "mL";
         currentRoundText.text = "Round " + round;
         currentRoundPips.text = currentRoundPipsS;
+        currentRoundPipsOnlyResults = "";
 
         currentRoundPips.enabled = true;
         roundBloodText.enabled = true;
         currentRoundText.enabled = true;
         bloodTotalText.enabled = true;
         restartButton.SetActive(false);
+        passButton.SetActive(true);
+        bloodTotalUnderText.enabled = true;
+        roundTotalUnderText.enabled = true;
         board.SetActive(true);
         boardSetup.SetupBoard();
     }
 
     public void Pass()
     {
-        Debug.Log("Passed");
+        //Debug.Log("Passed");
         cardsFlipped = 0;
         //subtract 2 from earnings and eventually scale with ante
         bloodTotal += bloodRound-2;
@@ -123,25 +137,26 @@ public class GameManager : MonoBehaviour
     public void Lose() 
     {
         //m_gameOver.Invoke();
-        Debug.Log("Lost");
-        cardsFlipped = 0;
-        lost = true;
+        //Debug.Log("Lost");
+        
+        //lost = true;
         bloodTotal -= bloodRound;
         bloodRound = 0;
         roundBloodText.text = "" + bloodRound + " mL";
         round++;
         bloodTotalText.text = "" + bloodTotal + " mL";
         boardSetup.SetupBoard();
+        cardsFlipped = 0;
 
         currentRoundPipsOnlyResults += "L ";
         currentRoundText.text = "Round " + round;
         currentRoundPips.text = ConstructPipString();
-        lost = false;
+        //lost = false;
     }
 
     void Win()
     {
-        Debug.Log("Won");
+        //Debug.Log("Won");
         cardsFlipped = 0;
         
         UpdateBloodRound(2);

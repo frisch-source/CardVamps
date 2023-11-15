@@ -160,7 +160,7 @@ public class BoardSetup : MonoBehaviour
             {
                 vampPosInDeck = i;
                 //cards[i].GetComponent<Card>().SetVamp();
-                Debug.Log("Vamp Location = " + (vampPosInDeck + 2));
+                //Debug.Log("Vamp Location = " + (vampPosInDeck + 2));
             }
             
             //Debug.Log("Card " + (i+1) + " = " + cardSprites[i]);
