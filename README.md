@@ -19,8 +19,9 @@ Winning, Losing, and Passing Rounds:
   - Pass: The player will gain blood equal to the current stakes minus 2 mL.
 
 Power Ups:
+All power ups are unlocked by flipping over the 3 cards in a respective row or column.
 The game contains three power ups which are as follows:
   - Box Power Up: This power up will create a 2x2 square when used that the vampire card must be within.
   - Arrows Power Up: This power up, when placed on a face up card, will generate arrows between any facedown cards adjenct but not diagonal from the face up card. The arrow direction indicates whether a face down card is worth more or less than the face up card.
   - Plus Power Up: This power up, when placed on a face down card, will display a number less than or equal to the value of the face down card.
-All power ups are unlocked by flipping over the 3 cards in a respective row or column.
+
