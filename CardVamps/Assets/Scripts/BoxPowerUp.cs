@@ -17,7 +17,11 @@ public class BoxPowerUp : MonoBehaviour
     private bool clicked = false;
     bool isEnabled = false;
     int vPos;
-    
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +31,7 @@ public class BoxPowerUp : MonoBehaviour
         Vector3 lowerRight = new Vector3(.75f, -1, -.5f);
         locations = new Vector3[] { upperLeft, upperRight, lowerLeft, lowerRight };
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        
         frame.gameObject.SetActive(false);
     }
 
