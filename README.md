@@ -3,7 +3,7 @@ Clone of High Stakes available here: https://krystman.itch.io/high-stakes
 
 # Instructions and Rules
 ***
-The goal of the game is to aquire 100 mL of blood within 20 rounds of cards. The card game is played in a 3x3 grid with the cards being valued at 2-10. The 10 of hearts is replaced with a special vampire card.
+The goal of the game is to acquire 100 mL of blood within 20 rounds of cards. The card game is played in a 3x3 grid with the cards being valued at 2-10. The 10 of hearts is replaced with a special vampire card.
 
 #### Rounds
 Each round consists of the player turning over cards until either 
@@ -22,6 +22,6 @@ Upon reaching any of the described conditions, the player will have milliliters 
 All power ups are unlocked by flipping over the 3 cards in a respective row or column.  
 The game contains three power ups which are as follows:
   - Box Power Up: This power up will create a 2x2 square when used that the vampire card must be within.
-  - Arrows Power Up: This power up, when placed on a face up card, will generate arrows between any facedown cards adjenct but not diagonal from the face up card. The arrow direction indicates whether a face down card is worth more or less than the face up card.
+  - Arrows Power Up: This power up, when placed on a face up card, will generate arrows between any face down cards adjacent but not diagonal from the face up card. The arrow direction indicates whether a face down card is worth more or less than the face up card.
   - Plus Power Up: This power up, when placed on a face down card, will display a number less than or equal to the value of the face down card.
 
